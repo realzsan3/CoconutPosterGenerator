@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <title>椰树生成器2024</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <style>
-        html, body {
+        html,
+        body {
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
@@ -81,9 +83,9 @@
         .yeshu-year {
             margin: .1rem 0;
             text-shadow: -.04rem -.04rem 0 #000,
-            .04rem -.04rem 0 #000,
-            -.04rem .04rem 0 #000,
-            .04rem .04rem 0 #000;
+                .04rem -.04rem 0 #000,
+                -.04rem .04rem 0 #000,
+                .04rem .04rem 0 #000;
             font-size: 3.3rem;
         }
 
@@ -103,9 +105,9 @@
             color: #FEEF50;
             font-size: 4rem;
             text-shadow: -.04rem -.04rem 0 #000,
-            .04rem -.04rem 0 #000,
-            -.04rem .04rem 0 #000,
-            .04rem .04rem 0 #000;
+                .04rem -.04rem 0 #000,
+                -.04rem .04rem 0 #000,
+                .04rem .04rem 0 #000;
             padding-top: 1vh;
         }
 
@@ -118,13 +120,13 @@
             color: #F6EE00;
         }
 
-        .yeshu-no-addon > p {
+        .yeshu-no-addon>p {
             line-height: 1;
             margin: 0;
             font-size: 1.2rem;
         }
 
-        .yeshu-no-addon > p:first-child {
+        .yeshu-no-addon>p:first-child {
             font-size: 1.5rem;
         }
 
@@ -142,106 +144,134 @@
         }
     </style>
 </head>
+
 <body>
-<img src="./yeshu.png" style="opacity: 0; width: 0; height: 0; position: absolute;">
-<p style="opacity: 0; width: 0; height: 0; position: absolute;">生成椰树椰汁风格海报</p>
-<div id="app" v-cloak>
-    <div id="preview">
-        <div id="yeshu" :style="yeshuStyleObj" v-if="status != 'save'">
-            <div class="yeshu-center">
-                <div class="yeshu-title" contenteditable="true">
-                    椰子特产在海南
+    <div id="app" v-cloak>
+        <div id="preview">
+            <div id="yeshu" :style="yeshuStyleObj" v-if="status != 'save'">
+                <div class="yeshu-center">
+                    <div class="yeshu-title" contenteditable="true">
+                        椰子特产在海南
+                    </div>
+                    <div class="yeshu-inner">
+                        <div class="yeshu-zhengzong" contenteditable="true">
+                            正宗
+                        </div>
+                        <div class="yeshu-brand" contenteditable="true">
+                            椰汁
+                        </div>
+                        <div class="yeshu-year" contenteditable="true">
+                            椰树
+                        </div>
+                        <div class="yeshu-island" contenteditable="true">
+                            35年坚持
+                        </div>
+                        <div class="yeshu-fresh" contenteditable="true">
+                            海南岛用新鲜椰肉
+                        </div>
+                        <div class="yeshu-xianzha" contenteditable="true">
+                            鲜榨
+                        </div>
+                    </div>
                 </div>
-                <div class="yeshu-inner">
-                    <div class="yeshu-zhengzong" contenteditable="true">
-                        正宗
-                    </div>
-                    <div class="yeshu-brand" contenteditable="true">
-                        椰汁
-                    </div>
-                    <div class="yeshu-year" contenteditable="true">
-                        椰树
-                    </div>
-                    <div class="yeshu-island" contenteditable="true">
-                        35年坚持
-                    </div>
-                    <div class="yeshu-fresh" contenteditable="true">
-                        海南岛用新鲜椰肉
-                    </div>
-                    <div class="yeshu-xianzha" contenteditable="true">
-                        鲜榨
-                    </div>
+                <div class="yeshu-no-addon">
+                    <p contenteditable="true">不用椰浆</p>
+                    <p contenteditable="true">不加香精当生榨</p>
                 </div>
             </div>
-            <div class="yeshu-no-addon">
-                <p contenteditable="true">不用椰浆</p>
-                <p contenteditable="true">不加香精当生榨</p>
-            </div>
+            <img id="save" v-if="status == 'save'" :src="dataURL" :style="yeshuStyleObj">
         </div>
-        <img id="save" v-if="status == 'save'" :src="dataURL" :style="yeshuStyleObj">
+        <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status != 'save'">
+            <button class="button" type="button" @click="preview" style="width: 70%">
+                {{ status == 'edit' ? '预览' : '正在生成预览图片…' }}
+            </button>
+            <button class="button" type="button" @click="source" style="width: 30%; background-color: #0021FC">
+                查看源码
+            </button>
+        </div>
+        <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status == 'save'">
+            <button class="button" @click="download" type="button" style="width: 70%">
+                下载/保存到本地
+            </button>
+            <button class="button" type="button" @click="back" style="width: 30%; background-color: #0021FC">
+                返回修改
+            </button>
+        </div>
     </div>
-    <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status != 'save'">
-        <button class="button" type="button" @click="save" style="width: 70%">
-            {{ status == 'edit' ? '保存编辑' : '正在生成图片…' }}
-        </button>
-        <button class="button" type="button" @click="source" style="width: 30%; background-color: #0021FC">
-            查看源码
-        </button>
-    </div>
-    <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status == 'save'">
-        <button class="button" type="button" style="width: 70%">
-            长按/右键图片保存
-        </button>
-        <button class="button" type="button" @click="back" style="width: 30%; background-color: #0021FC">
-            返回修改
-        </button>
-    </div>
-</div>
-<script src="//cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-<script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
-<script>
-    var vm = new Vue({
-        el: '#app',
-        data: {
-            yeshuStyleObj: {
-                width: 'auto',
-                height: 0
+    <script src="./html2canvas.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                yeshuStyleObj: {
+                    width: 'auto',
+                    height: 0
+                },
+                saveBtnHeight: 50,
+
+                status: 'edit',
+                dataURL: ''
             },
-            saveBtnHeight: 50,
+            mounted: function () {
+                var h = window.innerHeight || document.documentElement.clientHeight;
+                var previewHeight = h - this.saveBtnHeight;
+                this.yeshuStyleObj.height = previewHeight + 'px';
+                this.yeshuStyleObj.width = (previewHeight / 2.1) + 'px';
 
-            status: 'edit',
-            dataURL: ''
-        },
-        mounted: function () {
-            var h = window.innerHeight || document.documentElement.clientHeight;
-            var previewHeight = h - this.saveBtnHeight;
-            this.yeshuStyleObj.height = previewHeight + 'px';
-            this.yeshuStyleObj.width = (previewHeight / 2.1) + 'px';
-
-            document.documentElement.style.fontSize = (previewHeight / 21) + 'px';
-        },
-        methods: {
-            back: function () {
-                this.status = 'edit';
+                document.documentElement.style.fontSize = (previewHeight / 21) + 'px';
             },
-            source: function () {
-                location.href = 'https://github.com/yong-s/CoconutPosterGenerator/'
-            },
-            save: function () {
-                var self = this;
-                this.status = 'wait';
+            methods: {
+                back: function () {
+                    this.status = 'edit';
+                },
+                source: function () {
+                    location.href = 'https://github.com/yong-s/CoconutPosterGenerator/'
+                },
+                // 预览函数
+                preview: function () {
+                    var self = this;
+                    self.status = 'wait';
 
-                var yeshu = document.getElementById('yeshu');
+                    var yeshu = document.getElementById('yeshu');
 
-                html2canvas(yeshu, {
-                    onrendered: function (canvas) {
-                        self.dataURL = canvas.toDataURL('image/png');
-                        self.status = 'save';
-                    }
-                })
+                    // 定义 html2canvas 的配置参数
+                    var options = {
+                        scale: 2, // 设置缩放比例为2，提高图片清晰度
+                        backgroundColor: '#ffffff', // 设置背景颜色为白色
+                        logging: false, // 禁用日志记录
+                        useCORS: true, // 启用跨域资源共享
+                        allowTaint: true, // 允许绘制跨域图片
+                        removeContainer: false, // 不移除原始元素
+                        letterRendering: true, // 启用字母渲染
+                        imageTimeout: 0 // 设置加载图片的超时时间为0，无限等待
+                    };
+
+                    // 调用 html2canvas 函数，并传入配置参数
+                    html2canvas(yeshu, options)
+                        .then(function (canvas) {
+                            // 在页面上显示生成的图片
+                            self.dataURL = canvas.toDataURL('image/png');
+                            self.status = 'save';
+                        })
+                        .catch(function (error) {
+                            console.error('An error occurred while previewing:', error);
+                        });
+                },
+                // 下载函数
+                download: function () {
+                    var previewImage = document.getElementById('preview');
+                    var link = document.createElement('a');
+                    link.href = previewImage.src;
+                    link.download = 'yeshu.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+
             }
-        }
-    })
-</script>
+        })
+    </script>
 </body>
+
 </html>
