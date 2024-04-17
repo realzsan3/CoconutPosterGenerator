@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>椰树生成器</title>
+    <title>椰树生成器2024</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <style>
         html, body {
@@ -57,7 +57,7 @@
         }
 
         .yeshu-inner {
-            background-color: #0021FC;
+            background-color: #0162B0;
             border: .04rem solid #000000;
             color: #ffffff;
             padding: .04rem .04rem .4rem;
@@ -88,19 +88,15 @@
         }
 
         .yeshu-island {
-            color: #FEEF50;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
+            background-color: #FD0000;
         }
 
         .yeshu-fresh {
-            border: .08rem solid #FD0000;
-            border-radius: .1rem;
             background-color: #FEEF50;
             color: #FD0000;
-            margin: .1rem -.1rem;
             padding: .1rem;
-
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .yeshu-xianzha {
@@ -110,6 +106,7 @@
             .04rem -.04rem 0 #000,
             -.04rem .04rem 0 #000,
             .04rem .04rem 0 #000;
+            padding-top: 1vh;
         }
 
         .yeshu-no-addon {
@@ -118,7 +115,7 @@
             background-color: #FD0000;
             padding: .1rem;
             margin: -.1rem .1rem;
-            color: #ffffff;
+            color: #F6EE00;
         }
 
         .yeshu-no-addon > p {
@@ -147,7 +144,7 @@
 </head>
 <body>
 <img src="./yeshu.png" style="opacity: 0; width: 0; height: 0; position: absolute;">
-<p style="opacity: 0; width: 0; height: 0; position: absolute;">生成椰树椰汁风格表情包</p>
+<p style="opacity: 0; width: 0; height: 0; position: absolute;">生成椰树椰汁风格海报</p>
 <div id="app" v-cloak>
     <div id="preview">
         <div id="yeshu" :style="yeshuStyleObj" v-if="status != 'save'">
@@ -160,16 +157,16 @@
                         正宗
                     </div>
                     <div class="yeshu-brand" contenteditable="true">
-                        椰树
+                        椰汁
                     </div>
                     <div class="yeshu-year" contenteditable="true">
-                        29年
+                        椰树
                     </div>
                     <div class="yeshu-island" contenteditable="true">
-                        坚持在海南岛
+                        35年坚持
                     </div>
                     <div class="yeshu-fresh" contenteditable="true">
-                        用新鲜椰子肉
+                        海南岛用新鲜椰肉
                     </div>
                     <div class="yeshu-xianzha" contenteditable="true">
                         鲜榨
@@ -228,7 +225,7 @@
                 this.status = 'edit';
             },
             source: function () {
-                location.href = 'https://github.com/SevenOutman/yeshu-generator/'
+                location.href = 'https://github.com/'
             },
             save: function () {
                 var self = this;
