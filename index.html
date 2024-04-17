@@ -221,6 +221,7 @@
 
                 document.documentElement.style.fontSize = (previewHeight / 21) + 'px';
             },
+
             methods: {
                 back: function () {
                     this.status = 'edit';
@@ -260,15 +261,16 @@
                 },
                 // 下载函数
                 download: function () {
-                    var previewImage = document.getElementById('preview');
+
+                    var previewImage = document.getElementById('save');
                     var link = document.createElement('a');
+
                     link.href = previewImage.src;
                     link.download = 'yeshu.png';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                 }
-
             }
         })
     </script>

@@ -1,6 +1,7 @@
 # 2024更新设计
 部署在[CF上](https://coconutpostergenerator.pages.dev/)
-
+1、update html2canvas to 1.4.1
+2、
 原作取自下面的大佬
 
 # yeshu-generator
