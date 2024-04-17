@@ -186,7 +186,7 @@
                 {{ status == 'edit' ? '预览' : '正在生成预览图片…' }}
             </button>
             <button class="button" type="button" @click="source" style="width: 30%; background-color: #0021FC">
-                查看源码
+                GitHub自部署
             </button>
         </div>
         <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status == 'save'">
@@ -227,7 +227,7 @@
                     this.status = 'edit';
                 },
                 source: function () {
-                    location.href = 'https://github.com/yong-s/CoconutPosterGenerator/'
+                    window.open('https://github.com/yong-s/CoconutPosterGenerator/', '_blank');
                 },
                 // 预览函数
                 preview: function () {
