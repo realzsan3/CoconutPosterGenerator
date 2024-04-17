@@ -1,7 +1,10 @@
 # 2024更新设计
+部署在[CF上](https://coconutpostergenerator.pages.dev/)
+
+
 原作取自下面的大佬
 
-#yeshu-generator
+# yeshu-generator
 
 > 椰树生成器
 
