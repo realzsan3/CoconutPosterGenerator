@@ -154,29 +154,17 @@
                         椰子特产在海南
                     </div>
                     <div class="yeshu-inner">
-                        <div class="yeshu-zhengzong" contenteditable="true">
-                            正宗
-                        </div>
-                        <div class="yeshu-brand" contenteditable="true">
-                            椰汁
-                        </div>
-                        <div class="yeshu-year" contenteditable="true">
-                            椰树
-                        </div>
-                        <div class="yeshu-island" contenteditable="true">
-                            35年坚持
-                        </div>
-                        <div class="yeshu-fresh" contenteditable="true">
-                            海南岛用新鲜椰肉
-                        </div>
-                        <div class="yeshu-xianzha" contenteditable="true">
-                            鲜榨
-                        </div>
+                        <div class="yeshu-zhengzong" contenteditable="true">{{ zhengzongContent }}</div>
+                        <div class="yeshu-brand" contenteditable="true">{{ brandContent }}</div>
+                        <div class="yeshu-year" contenteditable="true">{{ yearContent }}</div>
+                        <div class="yeshu-island" contenteditable="true">{{ islandContent }}</div>
+                        <div class="yeshu-fresh" contenteditable="true">{{ freshContent }}</div>
+                        <div class="yeshu-xianzha" contenteditable="true">{{ xianzhaContent }}</div>
                     </div>
                 </div>
                 <div class="yeshu-no-addon">
-                    <p contenteditable="true">不用椰浆</p>
-                    <p contenteditable="true">不加香精当生榨</p>
+                    <p contenteditable="true">{{ addonContent[0] }}</p>
+                    <p contenteditable="true">{{ addonContent[1] }}</p>
                 </div>
             </div>
             <img id="save" v-if="status == 'save'" :src="dataURL" :style="yeshuStyleObj">
@@ -211,7 +199,27 @@
                 saveBtnHeight: 50,
 
                 status: 'edit',
-                dataURL: ''
+                dataURL: '',
+
+                // 初始值
+                titleContent: '椰子特产在海南',
+                zhengzongContent: '正宗',
+                brandContent: '椰汁',
+                yearContent: '椰树',
+                islandContent: '35年坚持',
+                freshContent: '海南岛用新鲜椰肉',
+                xianzhaContent: '鲜榨',
+                addonContent: ['不用椰浆', '不加香精当生榨'],
+
+                // 上一次编辑后的内容
+                prevTitleContent: '',
+                prevZhengzongContent: '',
+                prevBrandContent: '',
+                prevYearContent: '',
+                prevIslandContent: '',
+                prevFreshContent: '',
+                prevXianzhaContent: '',
+                prevAddonContent: []
             },
             mounted: function () {
                 var h = window.innerHeight || document.documentElement.clientHeight;
@@ -224,6 +232,14 @@
 
             methods: {
                 back: function () {
+                    this.titleContent = this.prevTitleContent;
+                    this.zhengzongContent = this.prevZhengzongContent;
+                    this.brandContent = this.prevBrandContent;
+                    this.yearContent = this.prevYearContent;
+                    this.islandContent = this.prevIslandContent;
+                    this.freshContent = this.prevFreshContent;
+                    this.xianzhaContent = this.prevXianzhaContent;
+                    this.addonContent = [...this.prevAddonContent];
                     this.status = 'edit';
                 },
                 source: function () {
@@ -233,6 +249,17 @@
                 preview: function () {
                     var self = this;
                     self.status = 'wait';
+
+                    // 保存当前编辑的内容作为上一次编辑后的内容
+                    this.prevTitleContent = document.querySelector('.yeshu-title').innerText;
+                    this.prevZhengzongContent = document.querySelector('.yeshu-zhengzong').innerText;
+                    this.prevBrandContent = document.querySelector('.yeshu-brand').innerText;
+                    this.prevYearContent = document.querySelector('.yeshu-year').innerText;
+                    this.prevIslandContent = document.querySelector('.yeshu-island').innerText;
+                    this.prevFreshContent = document.querySelector('.yeshu-fresh').innerText;
+                    this.prevXianzhaContent = document.querySelector('.yeshu-xianzha').innerText;
+                    const addonParagraphs = document.querySelectorAll('.yeshu-no-addon > p');
+                    this.prevAddonContent = [...addonParagraphs].map(p => p.innerText);
 
                     var yeshu = document.getElementById('yeshu');
 
