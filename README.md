@@ -1,8 +1,8 @@
 # 2024更新设计
 部署在[CF上](https://coconutpostergenerator.pages.dev/)
-1、update html2canvas to 1.4.1
-2、修复图片保存时失真
-3、点击保存可保存到本地
+1. update html2canvas to 1.4.1
+2. 修复图片保存时失真
+3. 点击保存可保存到本地
 
 原作取自下面的大佬
 
